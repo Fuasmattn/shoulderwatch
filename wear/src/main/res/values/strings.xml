@@ -1,4 +1,64 @@
 <resources>
     <string name="app_name">Shoulderwatch</string>
     <string name="hello_world">Hello World!</string>
+
+
+    <!-- Welche Werte? -->
+
+    <array name="environment">
+        <string>Öffentlicher Nahverkehr</string>
+        <string>Öffentlicher Platz</string>
+        <string>Clubs, Partys, Events</string>
+    </array>
+
+    <array name="devicetype">
+        <string>analog</string>
+        <string>digital</string>
+    </array>
+
+    <array name="device_analog">
+        <string>Buch</string>
+        <string>Zeitung</string>
+    </array>
+
+    <array name="device_digital">
+        <string>Buch</string>
+        <string>Zeitung</string>
+    </array>
+
+    <array name="content">
+        <string>Text</string>
+        <string>Bilder</string>
+        <string>Nachrichten</string>
+        <string>Passwörter</string>
+    </array>
+
+    <array name="surf_rating">
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+    </array>
+
+    <array name="relative_position">
+        <string>1</string>
+        <string>2</string>
+        <string>3</string>
+        <string>4</string>
+        <string>5</string>
+    </array>
+
+    <array name="crowd_density">
+        <string>wenige Leute</string>
+        <string>einige Leute</string>
+        <string>viele Leute</string>
+        <string>sehr viele Leute</string>
+    </array>
+
+
+    <array name="defence_level">
+        <string>wenig verdeckt</string>
+        <string>viel verdeckt</string>
+        <string>sehr viel bedeckt</string>
+    </array>
+
 </resources>
