@@ -6,59 +6,59 @@
     <!-- Welche Werte? -->
 
     <array name="environment">
-        <string>Öffentlicher Nahverkehr</string>
-        <string>Öffentlicher Platz</string>
-        <string>Clubs, Partys, Events</string>
+        <item>Öffentlicher Nahverkehr</item>
+        <item>Öffentlicher Platz</item>
+        <item>Clubs, Partys, Events</item>
     </array>
 
     <array name="devicetype">
-        <string>analog</string>
-        <string>digital</string>
+        <item>analog</item>
+        <item>digital</item>
     </array>
 
     <array name="device_analog">
-        <string>Buch</string>
-        <string>Zeitung</string>
+        <item>Buch</item>
+        <item>Zeitung</item>
     </array>
 
     <array name="device_digital">
-        <string>Buch</string>
-        <string>Zeitung</string>
+        <item>Buch</item>
+        <item>Zeitung</item>
     </array>
 
     <array name="content">
-        <string>Text</string>
-        <string>Bilder</string>
-        <string>Nachrichten</string>
-        <string>Passwörter</string>
+        <item>Text</item>
+        <item>Bilder</item>
+        <item>Nachrichten</item>
+        <item>Passwörter</item>
     </array>
 
     <array name="surf_rating">
-        <string>1</string>
-        <string>2</string>
-        <string>3</string>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </array>
 
     <array name="relative_position">
-        <string>1</string>
-        <string>2</string>
-        <string>3</string>
-        <string>4</string>
-        <string>5</string>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </array>
 
     <array name="crowd_density">
-        <string>wenige Leute</string>
-        <string>einige Leute</string>
-        <string>viele Leute</string>
-        <string>sehr viele Leute</string>
+        <item>wenige Leute</item>
+        <item>einige Leute</item>
+        <item>viele Leute</item>
+        <item>sehr viele Leute</item>
     </array>
 
 
     <array name="defence_level">
-        <string>wenig verdeckt</string>
-        <string>viel verdeckt</string>
-        <string>sehr viel bedeckt</string>
+        <item>wenig verdeckt</item>
+        <item>viel verdeckt</item>
+        <item>sehr viel bedeckt</item>
     </array>
 
 </resources>
