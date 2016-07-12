@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lmu.ath.shoulderwatch.ui.SelectionsActivity"
+    tools:context=".ui.activities.SelectionsActivity"
     tools:deviceIds="wear_round">
 
     <TextView

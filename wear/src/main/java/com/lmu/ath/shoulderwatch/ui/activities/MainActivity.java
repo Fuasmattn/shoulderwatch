@@ -1,4 +1,4 @@
-package com.lmu.ath.shoulderwatch.ui;
+package com.lmu.ath.shoulderwatch.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

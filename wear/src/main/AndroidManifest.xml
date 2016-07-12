@@ -17,7 +17,7 @@
             android:required="false" />
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.DeviceDefault.Light">
             <intent-filter>
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SelectionsActivity"
+            android:name=".ui.activities.SelectionsActivity"
             android:label="@string/title_activity_selections">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

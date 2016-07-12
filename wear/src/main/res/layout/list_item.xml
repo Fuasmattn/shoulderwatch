@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lmu.ath.shoulderwatch.ui.WearableListItemLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="80dip">
+
+    <android.support.wearable.view.CircledImageView
+        android:id="@+id/circle"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_width="52dip"
+        android:layout_height="52dip"
+        android:src="@mipmap/metro"
+        app:circle_border_color="@color/white"
+        app:circle_border_width="2dp"/>
+    <TextView
+        android:id="@+id/name"
+        android:gravity="center_vertical|left"
+        android:layout_width="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_height="match_parent"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+</com.lmu.ath.shoulderwatch.ui.WearableListItemLayout>
