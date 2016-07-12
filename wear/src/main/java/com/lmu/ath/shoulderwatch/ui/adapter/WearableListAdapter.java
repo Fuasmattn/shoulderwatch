@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.lmu.ath.shoulderwatch.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by daniela on 11.07.16.
@@ -75,5 +76,9 @@ public class WearableListAdapter extends WearableListView.Adapter {
     @Override
     public int getItemCount() {
         return listData.length;
+    }
+
+    public Object getItem (int position){
+        return listData[position];
     }
 }

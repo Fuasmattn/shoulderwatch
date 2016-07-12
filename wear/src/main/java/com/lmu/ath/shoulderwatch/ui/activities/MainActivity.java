@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.lmu.ath.shoulderwatch.R;
+import com.lmu.ath.shoulderwatch.database.DataManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,6 +23,7 @@ public class MainActivity extends WearableActivity {
     private BoxInsetLayout mContainerView;
     private TextView mClockView;
     private Button mStartButton;
+    private DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +31,15 @@ public class MainActivity extends WearableActivity {
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
         initiateUI();
+        dataManager = DataManager.getInstance();
 
         mStartButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
+                dataManager.createInitalDatabaseRecord();
                 Intent intent = new Intent(view.getContext(), SelectionsActivity.class);
                 startActivity(intent);
-
             }
         });
 

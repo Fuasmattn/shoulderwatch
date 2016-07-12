@@ -7,6 +7,7 @@ import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.GridViewPager;
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.ui.adapter.GridPagerAdapter;
+import com.lmu.ath.shoulderwatch.ui.fragments.FinishFragment;
 import com.lmu.ath.shoulderwatch.ui.fragments.SelectableListFragment;
 
 public class SelectionsActivity extends FragmentActivity {
@@ -33,7 +34,7 @@ public class SelectionsActivity extends FragmentActivity {
 
         //TODO: add fragments for all listtypes + add content
         final Fragment[] items = {SelectableListFragment.newInstance(ENVIRONMENT), SelectableListFragment.newInstance(DEVICETYPE), SelectableListFragment.newInstance(DEVICEANALOG)
-                , SelectableListFragment.newInstance(DEVICEDIGITAL), SelectableListFragment.newInstance(CONTENT)};
+                , SelectableListFragment.newInstance(DEVICEDIGITAL), SelectableListFragment.newInstance(CONTENT), FinishFragment.newInstance()};
 
         // Get UI references
         mPageIndicator = (DotsPageIndicator) findViewById(R.id.page_indicator);

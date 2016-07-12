@@ -35,6 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".database.ShoulderWatchContentProvider"
+            android:authorities="com.lmu.ath.shoulderwatch.db.contentprovider"></provider>
     </application>
 
 </manifest>

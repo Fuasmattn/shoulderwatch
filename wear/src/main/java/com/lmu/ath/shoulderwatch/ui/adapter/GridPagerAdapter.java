@@ -21,7 +21,6 @@ public class GridPagerAdapter extends FragmentGridPagerAdapter{
         this.fragments = fragments;
     }
 
-
     @Override
     public int getRowCount() {
         return 1;
