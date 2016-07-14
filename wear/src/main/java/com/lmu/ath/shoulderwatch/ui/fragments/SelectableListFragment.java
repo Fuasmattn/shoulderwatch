@@ -54,7 +54,13 @@ public class SelectableListFragment extends Fragment implements WearableListView
         //TODO: add correct icons
         ArrayList<Drawable> environmentIcons = new ArrayList<Drawable>();
         environmentIcons.add(getResources().getDrawable(R.mipmap.metro, null));
-        environmentIcons.add(getResources().getDrawable(R.mipmap.metro, null));
+        environmentIcons.add(getResources().getDrawable(R.mipmap.place, null));
+        environmentIcons.add(getResources().getDrawable(R.mipmap.building, null));
+        environmentIcons.add(getResources().getDrawable(R.mipmap.event, null));
+
+        ArrayList<Drawable> typeIcons = new ArrayList<Drawable>();
+        typeIcons.add(getResources().getDrawable(R.mipmap.analog, null));
+        typeIcons.add(getResources().getDrawable(R.mipmap.digital, null));
 
         Context context = getActivity();
 
@@ -63,7 +69,7 @@ public class SelectableListFragment extends Fragment implements WearableListView
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.environment), environmentIcons);
 
         } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.devicetype), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.devicetype), typeIcons);
 
         } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), environmentIcons);
@@ -73,6 +79,18 @@ public class SelectableListFragment extends Fragment implements WearableListView
 
         } else if (listType.equals(SelectionsActivity.CONTENT)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), environmentIcons);
+
+        } else if (listType.equals(SelectionsActivity.SURFRATING)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_rating), environmentIcons);
+
+        }else if (listType.equals(SelectionsActivity.RELATIVE_POSITION)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.relative_position), environmentIcons);
+
+        }else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.crowd_density), environmentIcons);
+
+        }else if (listType.equals(SelectionsActivity.DEFENCE_LEVEL)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.defence_level), environmentIcons);
         }
 
         if (wearableListAdapter != null){

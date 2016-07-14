@@ -8,9 +8,7 @@
     <array name="environment">
         <item>Öffentlicher Nahverkehr</item>
         <item>Öffentlicher Platz</item>
-        <item>Clubs, Partys, Events</item>
-        <item>Öffentlicher Nahverkehr</item>
-        <item>Öffentlicher Platz</item>
+        <item>Öffentliches Gebäude</item>
         <item>Clubs, Partys, Events</item>
     </array>
 
@@ -37,9 +35,9 @@
     </array>
 
     <array name="surf_rating">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
+        <item>leicht</item>
+        <item>mittel</item>
+        <item>schwer</item>
     </array>
 
     <array name="relative_position">

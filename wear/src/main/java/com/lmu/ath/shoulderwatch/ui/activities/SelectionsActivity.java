@@ -34,7 +34,9 @@ public class SelectionsActivity extends FragmentActivity {
 
         //TODO: add fragments for all listtypes + add content
         final Fragment[] items = {SelectableListFragment.newInstance(ENVIRONMENT), SelectableListFragment.newInstance(DEVICETYPE), SelectableListFragment.newInstance(DEVICEANALOG)
-                , SelectableListFragment.newInstance(DEVICEDIGITAL), SelectableListFragment.newInstance(CONTENT), FinishFragment.newInstance()};
+                , SelectableListFragment.newInstance(DEVICEDIGITAL), SelectableListFragment.newInstance(CONTENT), SelectableListFragment.newInstance(SURFRATING),
+                SelectableListFragment.newInstance(DEFENCE_LEVEL), SelectableListFragment.newInstance(RELATIVE_POSITION), SelectableListFragment.newInstance(CROWD_LEVEL),
+                FinishFragment.newInstance()};
 
         // Get UI references
         mPageIndicator = (DotsPageIndicator) findViewById(R.id.page_indicator);
