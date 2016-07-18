@@ -51,7 +51,7 @@ public class SelectableListFragment extends Fragment implements WearableListView
 
         dataManager = DataManager.getInstance();
 
-        //TODO: add correct icons
+        // Icon Initialization
         ArrayList<Drawable> environmentIcons = new ArrayList<Drawable>();
         environmentIcons.add(getResources().getDrawable(R.mipmap.metro, null));
         environmentIcons.add(getResources().getDrawable(R.mipmap.place, null));
@@ -61,6 +61,37 @@ public class SelectableListFragment extends Fragment implements WearableListView
         ArrayList<Drawable> typeIcons = new ArrayList<Drawable>();
         typeIcons.add(getResources().getDrawable(R.mipmap.analog, null));
         typeIcons.add(getResources().getDrawable(R.mipmap.digital, null));
+
+        ArrayList<Drawable> analogDeviceIcons = new ArrayList<Drawable>();
+        analogDeviceIcons.add(getResources().getDrawable(R.mipmap.buch, null));
+        analogDeviceIcons.add(getResources().getDrawable(R.mipmap.zeitung, null));
+
+        ArrayList<Drawable> digitalDeviceIcons = new ArrayList<Drawable>();
+        digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.phone, null));
+        digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.tablet, null));
+
+        ArrayList<Drawable> contentIcons = new ArrayList<Drawable>();
+        contentIcons.add(getResources().getDrawable(R.mipmap.text, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.bild, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.nachricht, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.passwort, null));
+
+        ArrayList<Drawable> surfRatingIcons = new ArrayList<Drawable>();
+        surfRatingIcons.add(getResources().getDrawable(R.mipmap.easy, null));
+        surfRatingIcons.add(getResources().getDrawable(R.mipmap.medium, null));
+        surfRatingIcons.add(getResources().getDrawable(R.mipmap.hard, null));
+
+        ArrayList<Drawable> defenceLevelIcons = new ArrayList<Drawable>();
+        defenceLevelIcons.add(getResources().getDrawable(R.mipmap.unsafe, null));
+        defenceLevelIcons.add(getResources().getDrawable(R.mipmap.mediumsafe, null));
+        defenceLevelIcons.add(getResources().getDrawable(R.mipmap.totallysafe, null));
+
+        ArrayList<Drawable> crowdDensityIcons = new ArrayList<Drawable>();
+        crowdDensityIcons.add(getResources().getDrawable(R.mipmap.wenige, null));
+        crowdDensityIcons.add(getResources().getDrawable(R.mipmap.einige, null));
+        crowdDensityIcons.add(getResources().getDrawable(R.mipmap.viele, null));
+        crowdDensityIcons.add(getResources().getDrawable(R.mipmap.sehrviele, null));
+
 
         Context context = getActivity();
 
@@ -72,25 +103,25 @@ public class SelectableListFragment extends Fragment implements WearableListView
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.devicetype), typeIcons);
 
         } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), analogDeviceIcons);
 
         } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_digital), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_digital), digitalDeviceIcons);
 
         } else if (listType.equals(SelectionsActivity.CONTENT)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), contentIcons);
 
         } else if (listType.equals(SelectionsActivity.SURFRATING)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_rating), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_rating), surfRatingIcons);
 
         }else if (listType.equals(SelectionsActivity.RELATIVE_POSITION)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.relative_position), environmentIcons);
 
         }else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.crowd_density), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.crowd_density), crowdDensityIcons);
 
         }else if (listType.equals(SelectionsActivity.DEFENCE_LEVEL)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.defence_level), environmentIcons);
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.defence_level), defenceLevelIcons);
         }
 
         if (wearableListAdapter != null){
