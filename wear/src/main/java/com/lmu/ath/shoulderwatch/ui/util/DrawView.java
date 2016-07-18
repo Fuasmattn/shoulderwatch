@@ -106,20 +106,21 @@ public class DrawView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        int x = (int)event.getX();
-        int y = (int)event.getY();
-
-        int p = 180 + (int) (Math.atan2(y - center.y, x - center.x) * 180 / Math.PI);
-        if(p > 0 && p < 180) {
-            pos = 45 + (int) Math.ceil(p / 6);
-            invalidate();
-            //Log.d("ATH", "Angle: " + p + "Seconds: " + pos);
-            //Log.d("ATH", "Pos: " + pos);
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+        if(event.getAction() == MotionEvent.ACTION_DOWN) {
+            Log.d("ATH", "DOWN " + x);
         }
-
-
-        return false;
+        if(event.getAction() == MotionEvent.ACTION_UP){
+                int p = 180 + (int) (Math.atan2(y - center.y, x - center.x) * 180 / Math.PI);
+                if (p > 0 && p < 180) {
+                    pos = 45 + (int) Math.ceil(p / 6);
+                    invalidate();
+                    //Log.d("ATH", "Angle: " + p + "Seconds: " + pos);
+                    //Log.d("ATH", "Pos: " + pos);
+                }
+            }
+        return true;
     }
 
 
