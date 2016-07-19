@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.ui.util.DrawView;
@@ -21,7 +23,7 @@ import com.lmu.ath.shoulderwatch.ui.util.DrawView;
  * Use the {@link PositionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PositionFragment extends Fragment {
+public class PositionFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -63,8 +65,7 @@ public class PositionFragment extends Fragment {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_position, container, false);
         drawView = (DrawView) root.findViewById(R.id.drawView);
-
-        drawView.updateLine(1);
+        ((Button) root.findViewById(R.id.buttonDrehen)).setOnClickListener(this);
         return root;
     }
 
@@ -75,6 +76,8 @@ public class PositionFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+
+
 
     @Override
     public void onAttach(Context context) {
@@ -93,6 +96,11 @@ public class PositionFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        drawView.turnIcon();
     }
 
     /**
