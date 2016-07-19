@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.lmu.ath.shoulderwatch.R;
@@ -22,7 +22,7 @@ public class MainActivity extends WearableActivity {
 
     private BoxInsetLayout mContainerView;
     private TextView mClockView;
-    private Button mStartButton;
+    private ImageButton mStartButton;
     private DataManager dataManager;
 
     @Override
@@ -48,7 +48,7 @@ public class MainActivity extends WearableActivity {
     private void initiateUI() {
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mClockView = (TextView) findViewById(R.id.clock);
-        mStartButton = (Button) findViewById(R.id.startBtn);
+        mStartButton = (ImageButton) findViewById(R.id.startBtn);
     }
 
     @Override

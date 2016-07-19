@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity"
-    tools:deviceIds="wear">
+    tools:deviceIds="wear"
+    android:background="@mipmap/startbackground">
 
     <TextView
         android:id="@+id/clock"
@@ -16,11 +17,12 @@
         android:textColor="@android:color/white"
         app:layout_box="all" />
 
-    <Button
+    <ImageButton
         android:id="@+id/startBtn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:layout_marginTop="60px"/>
+        android:background="@mipmap/startbutton"
+        android:layout_marginTop="110px"
+        android:layout_marginLeft="90px"/>
 
 </android.support.wearable.view.BoxInsetLayout>
