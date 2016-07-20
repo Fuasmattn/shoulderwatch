@@ -23,7 +23,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SelectableListFragment extends Fragment implements WearableListView.ClickListener{
+public class SelectableListFragment extends Fragment implements WearableListView.OnCentralPositionChangedListener, WearableListView.OnScrollListener{
 
 
     private WearableListAdapter wearableListAdapter = null;
@@ -46,7 +46,8 @@ public class SelectableListFragment extends Fragment implements WearableListView
 
        // WearableListView listView = (WearableListView) view.findViewById(R.id.wearable_list);
         listView = (WearableListView) view.findViewById(R.id.wearable_list);
-
+       // listView.addOnScrollListener(this);
+        listView.addOnCentralPositionChangedListener(this);
         listType = getArguments().getString("type");
 
         dataManager = DataManager.getInstance();
@@ -128,47 +129,12 @@ public class SelectableListFragment extends Fragment implements WearableListView
             listView.setAdapter(wearableListAdapter);
         }
 
-
-        // Set a click listener
-        listView.setClickListener(this);
+        //Save initial values to DB
+        saveValues(0);
 
         return view;
     }
 
-    // WearableListView click listener
-    @Override
-    public void onClick(WearableListView.ViewHolder v) {
-        Integer tag = (Integer) v.itemView.getTag();
-
-        //on button press, save data to SQLite Database
-        ContentValues values = new ContentValues();
-
-        if (listType.equals(SelectionsActivity.ENVIRONMENT)){
-            String item = (String) wearableListAdapter.getItem(tag);
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_ENVIRONMENT, item);
-
-        } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
-            String item = (String) wearableListAdapter.getItem(tag);
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICETYPE, item);
-
-        } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
-            String item = (String) wearableListAdapter.getItem(tag);
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_ANALOG, item);
-
-        } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
-            String item = (String) wearableListAdapter.getItem(tag);
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_DIGITAL, item);
-
-        } else if (listType.equals(SelectionsActivity.CONTENT)){
-            String item = (String) wearableListAdapter.getItem(tag);
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CONTENT, item);
-        }
-    }
-
-    @Override
-    public void onTopEmptyRegionClick() {
-
-    }
 
     @Override
     public void onStart() {
@@ -180,5 +146,54 @@ public class SelectableListFragment extends Fragment implements WearableListView
     public void onPause() {
         super.onPause();
         listView.setGreedyTouchMode(false);
+    }
+
+    @Override
+    public void onScroll(int i) {
+
+    }
+
+    @Override
+    public void onAbsoluteScrollChange(int i) {
+
+    }
+
+    @Override
+    public void onScrollStateChanged(int i) {
+
+    }
+
+    @Override
+    public void onCentralPositionChanged(int i) {
+        saveValues(i);
+    }
+
+    public void saveValues (int i){
+        String item = (String) wearableListAdapter.getItem(i);
+
+        if (listType.equals(SelectionsActivity.ENVIRONMENT)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_ENVIRONMENT, item);
+
+        } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICETYPE, item);
+
+        } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_ANALOG, item);
+
+        } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_DIGITAL, item);
+
+        } else if (listType.equals(SelectionsActivity.CONTENT)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CONTENT, item);
+
+        } else if (listType.equals(SelectionsActivity.SURFRATING)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_SURF_RATING, item);
+
+        } else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CROWD_DENSITY, item);
+
+        } else if (listType.equals(SelectionsActivity.DEFENCE_LEVEL)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEFENCE_LEVEL, item);
+        }
     }
 }

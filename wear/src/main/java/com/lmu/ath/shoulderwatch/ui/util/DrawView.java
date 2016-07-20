@@ -19,6 +19,7 @@ import android.view.WindowManager;
 
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.ui.activities.MainActivity;
+import com.lmu.ath.shoulderwatch.ui.fragments.PositionFragmentTouchListener;
 
 import java.util.Date;
 
@@ -39,8 +40,11 @@ public class DrawView extends View {
     Bitmap iconSelf = loadBitmap(R.mipmap.ic_top);
     private Matrix matrix;
     private Matrix matrixSelf;
+    private PositionFragmentTouchListener touchListener;
 
-
+    public void setTouchListener(PositionFragmentTouchListener touchListener) {
+        this.touchListener = touchListener;
+    }
 
     private void setToCenterCoordinates() {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -133,6 +137,7 @@ public class DrawView extends View {
             else if (betweenExclusive(p, 110, 155)) pos = 8;
             else if (betweenExclusive(p, 155, 180)) pos = 15;
 
+            touchListener.positionSelected(pos);
             invalidate();
         }
         return true;
@@ -149,6 +154,10 @@ public class DrawView extends View {
         iconSelf= rotate(iconSelf);
 
         invalidate();
+    }
+
+    public int getCurrentSelectedPosition(){
+        return pos;
     }
 
     private Bitmap rotate(Bitmap bitm) {
