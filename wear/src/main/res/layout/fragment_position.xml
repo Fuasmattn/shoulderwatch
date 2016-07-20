@@ -21,13 +21,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/drawView"
         android:background="#010101"
-        android:layout_below="@id/title"/>
+        android:layout_below="@id/title"
+        android:layout_above="@+id/buttonDrehen" />
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="45dp"
         android:text="DREHEN"
+        android:layout_marginBottom="10dp"
         android:id="@+id/buttonDrehen"
+        android:layout_marginTop="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true" />
