@@ -2,8 +2,13 @@ package com.lmu.ath.shoulderwatch.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.location.Location;
 import android.net.Uri;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by daniela on 12.07.16.
@@ -26,10 +31,20 @@ public class DataManager {
         return instance;
     }
 
-    public void createInitalDatabaseRecord(){
+    public void createInitalDatabaseRecord(Location location){
         if (currentContentvalue == null) {
             currentContentvalue = new ContentValues();
         }
+        if (location != null){
+            addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_LOCATION_X, String.valueOf(location.getLatitude()));
+            addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_LOCATION_Y, String.valueOf(location.getLongitude()));
+        }
+
+        String currentDateTimeString = new SimpleDateFormat("dd.MM.yyyy , HH:mm:ss").format(new Date());
+        if (currentDateTimeString != null){
+            addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_TIME, currentDateTimeString);
+        }
+
     }
 
     public void addStringValueToDatabaseRecord(String key, String value){

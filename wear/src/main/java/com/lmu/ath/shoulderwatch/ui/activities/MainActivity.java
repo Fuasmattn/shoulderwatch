@@ -1,13 +1,22 @@
 package com.lmu.ath.shoulderwatch.ui.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.database.DataManager;
 
@@ -15,7 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends WearableActivity {
+public class MainActivity extends WearableActivity implements
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
@@ -24,6 +34,8 @@ public class MainActivity extends WearableActivity {
     private TextView mClockView;
     private ImageButton mStartButton;
     private DataManager dataManager;
+    private GoogleApiClient googleApiClient;
+    private Location lastLocation = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +45,19 @@ public class MainActivity extends WearableActivity {
         initiateUI();
         dataManager = DataManager.getInstance();
 
+        if (googleApiClient == null) {
+            googleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
         mStartButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                dataManager.createInitalDatabaseRecord();
+                dataManager.createInitalDatabaseRecord(lastLocation);
                 Intent intent = new Intent(view.getContext(), SelectionsActivity.class);
                 startActivity(intent);
             }
@@ -79,5 +99,34 @@ public class MainActivity extends WearableActivity {
             mContainerView.setBackground(null);
             mClockView.setVisibility(View.GONE);
         }
+    }
+
+
+    protected void onStart() {
+        googleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        googleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
