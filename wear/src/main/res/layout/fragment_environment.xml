@@ -1,6 +1,6 @@
 <android.support.wearable.view.BoxInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
+    android:background="@color/black"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -10,8 +10,7 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent"
             android:scrollbars="none"
-            android:dividerHeight="0dp"
-            android:background="#E18D00">
+            android:dividerHeight="0dp">
         </android.support.wearable.view.WearableListView>
 
         <!--<ListView
