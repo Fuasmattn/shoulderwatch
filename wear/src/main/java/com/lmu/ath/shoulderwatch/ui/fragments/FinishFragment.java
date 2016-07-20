@@ -1,6 +1,7 @@
 package com.lmu.ath.shoulderwatch.ui.fragments;
 
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,6 +40,8 @@ public class FinishFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     dataManager.saveDataBaseRecord(getActivity());
+                    Activity parentactivity = getActivity();
+                    parentactivity.finish();
                 }
             });
         } catch (ClassCastException e){
