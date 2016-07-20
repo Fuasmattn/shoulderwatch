@@ -2,7 +2,6 @@ package com.lmu.ath.shoulderwatch.ui.fragments;
 
 
 import android.app.Fragment;
-import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.database.DataManager;
@@ -30,6 +30,8 @@ public class SelectableListFragment extends Fragment implements WearableListView
     private String listType;
     private DataManager dataManager;
     private WearableListView listView;
+    private TextView titleText;
+
 
     public static SelectableListFragment newInstance(String type) {
         SelectableListFragment selectableListFragment = new SelectableListFragment();
@@ -42,7 +44,7 @@ public class SelectableListFragment extends Fragment implements WearableListView
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_environment, container, false);
+        View view = inflater.inflate(R.layout.fragment_selectable_list, container, false);
 
        // WearableListView listView = (WearableListView) view.findViewById(R.id.wearable_list);
         listView = (WearableListView) view.findViewById(R.id.wearable_list);
@@ -51,6 +53,7 @@ public class SelectableListFragment extends Fragment implements WearableListView
         listType = getArguments().getString("type");
 
         dataManager = DataManager.getInstance();
+        titleText = (TextView)view.findViewById(R.id.title);
 
         // Icon Initialization
         ArrayList<Drawable> environmentIcons = new ArrayList<Drawable>();
@@ -99,30 +102,31 @@ public class SelectableListFragment extends Fragment implements WearableListView
 
         if (listType.equals(SelectionsActivity.ENVIRONMENT)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.environment), environmentIcons);
-
+            titleText.setText("Umgebung");
         } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.devicetype), typeIcons);
-
+            titleText.setText("Gerätetyp");
         } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), analogDeviceIcons);
-
+            titleText.setText("Geräte - analog");
         } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_digital), digitalDeviceIcons);
-
+            titleText.setText("Geräte - digital");
         } else if (listType.equals(SelectionsActivity.CONTENT)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), contentIcons);
-
+            titleText.setText("Inhalt");
         } else if (listType.equals(SelectionsActivity.SURFRATING)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_rating), surfRatingIcons);
-
+            titleText.setText("Inhalte zu sehen");
         }else if (listType.equals(SelectionsActivity.RELATIVE_POSITION)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.relative_position), environmentIcons);
-
+            titleText.setText("Position");
         }else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.crowd_density), crowdDensityIcons);
-
+            titleText.setText("Anzahl umgebende Personen");
         }else if (listType.equals(SelectionsActivity.DEFENCE_LEVEL)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.defence_level), defenceLevelIcons);
+            titleText.setText("Verdeckung");
         }
 
         if (wearableListAdapter != null){

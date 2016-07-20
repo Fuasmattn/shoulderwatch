@@ -5,14 +5,23 @@
     tools:context="com.lmu.ath.shoulderwatch.ui.fragments.PositionFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:id="@+id/title"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:background="@color/orange50"
+        android:layout_alignParentTop="true"/>
 
     <com.lmu.ath.shoulderwatch.ui.util.DrawView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/drawView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:background="#010101" />
+        android:background="#010101"
+        android:layout_below="@id/title"/>
 
     <Button
         android:layout_width="wrap_content"

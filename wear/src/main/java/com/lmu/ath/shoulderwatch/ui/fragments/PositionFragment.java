@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.database.DataManager;
@@ -23,6 +24,7 @@ public class PositionFragment extends Fragment implements View.OnClickListener, 
     private View root;
     private DrawView drawView;
     private DataManager dataManager;
+    private TextView titleText;
 
     public static PositionFragment newInstance() {
         PositionFragment fragment = new PositionFragment();
@@ -40,9 +42,11 @@ public class PositionFragment extends Fragment implements View.OnClickListener, 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         root = inflater.inflate(R.layout.fragment_position, container, false);
+        titleText = (TextView)root.findViewById(R.id.title);
         drawView = (DrawView) root.findViewById(R.id.drawView);
         drawView.setTouchListener(this);
         ((Button) root.findViewById(R.id.buttonDrehen)).setOnClickListener(this);
+        titleText.setText("Position");
 
         int currentPosition = drawView.getCurrentSelectedPosition();
         dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_RELATIVE_POSITION, String.valueOf(currentPosition));

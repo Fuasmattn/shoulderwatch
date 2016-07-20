@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.GridViewPager;
+import android.widget.TextView;
+
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.ui.adapter.GridPagerAdapter;
 import com.lmu.ath.shoulderwatch.ui.fragments.FinishFragment;
