@@ -96,7 +96,7 @@ public class MainActivity extends WearableActivity implements
 
             mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
         } else {
-            mContainerView.setBackground(null);
+            mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
             mClockView.setVisibility(View.GONE);
         }
     }

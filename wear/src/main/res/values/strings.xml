@@ -20,18 +20,29 @@
     <array name="device_analog">
         <item>Buch</item>
         <item>Zeitung</item>
+        <item>Notizbuch</item>
     </array>
 
     <array name="device_digital">
         <item>Smartphone</item>
         <item>Tablet</item>
+        <item>Notebook</item>
+        <item>Smartwatch</item>
+        <item>PDA</item>
     </array>
+
+    <!--Telefonieren?-->
+    <!--Empfindlichkeit der Daten?-->
 
     <array name="content">
         <item>Text</item>
         <item>Bilder</item>
         <item>Nachrichten</item>
         <item>Passwörter</item>
+        <item>Spiele</item>
+        <item>Videos</item>
+        <item>Banking</item>
+        <item>Maps/Location</item>
     </array>
 
     <array name="surf_rating">
