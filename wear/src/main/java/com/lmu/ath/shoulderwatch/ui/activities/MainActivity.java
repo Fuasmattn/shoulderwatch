@@ -10,26 +10,40 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Result;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.wearable.CapabilityApi;
+import com.google.android.gms.wearable.CapabilityInfo;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.Wearable;
 import com.lmu.ath.shoulderwatch.R;
 import com.lmu.ath.shoulderwatch.database.DataManager;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Set;
 
 public class MainActivity extends WearableActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
+    private static final String
+            JSON_TRANSCRIPTION_CAPABILITY_NAME = "json_transcription";
+    public static final String JSON_TRANSCRIPTION_MESSAGE_PATH = "/json_transcription";
 
     private BoxInsetLayout mContainerView;
     private TextView mClockView;
@@ -40,6 +54,9 @@ public class MainActivity extends WearableActivity implements
 
     private Button intentBtn;
 
+    private String transcriptionNodeId = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,24 +64,33 @@ public class MainActivity extends WearableActivity implements
         setAmbientEnabled();
         initiateUI();
         dataManager = DataManager.getInstance();
-        intentBtn = (Button)findViewById(R.id.sendDataBtn);
-
-        intentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dataManager.getAllDatabaseEntries(getApplicationContext());
-            }
-        });
-
-
 
         if (googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
+                    .addApi(Wearable.API)
                     .build();
         }
+
+
+        intentBtn = (Button)findViewById(R.id.sendDataBtn);
+
+        intentBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String json = dataManager.getAllDatabaseEntries(getApplicationContext());
+                byte[] jsonBytes;
+                try {
+                    jsonBytes = json.getBytes("UTF-8");
+                    requestTranscription(jsonBytes);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            }
+        });
 
         mStartButton.setOnClickListener(new View.OnClickListener() {
 
@@ -114,6 +140,58 @@ public class MainActivity extends WearableActivity implements
         }
     }
 
+    protected void setupJSONTranscription() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                CapabilityApi.GetCapabilityResult result =
+                        Wearable.CapabilityApi.getCapability(
+                                googleApiClient, JSON_TRANSCRIPTION_CAPABILITY_NAME,
+                                CapabilityApi.FILTER_REACHABLE).await();
+
+                updateTranscriptionCapability(result.getCapability());
+            }
+        }).start();
+    }
+
+    protected void updateTranscriptionCapability(CapabilityInfo capabilityInfo) {
+        Set<Node> connectedNodes = capabilityInfo.getNodes();
+
+        transcriptionNodeId = pickBestNodeId(connectedNodes);
+    }
+
+    protected String pickBestNodeId(Set<Node> nodes) {
+        String bestNodeId = null;
+        // Find a nearby node or pick one arbitrarily
+        for (Node node : nodes) {
+            if (node.isNearby()) {
+                return node.getId();
+            }
+            bestNodeId = node.getId();
+        }
+        return bestNodeId;
+    }
+
+    protected void requestTranscription(byte[] json) {
+        if (transcriptionNodeId != null) {
+            Wearable.MessageApi.sendMessage(googleApiClient, transcriptionNodeId,
+                    JSON_TRANSCRIPTION_MESSAGE_PATH, json).setResultCallback(
+                    new ResultCallback<MessageApi.SendMessageResult>() {
+                        @Override
+                        public void onResult(MessageApi.SendMessageResult sendMessageResult) {
+                            if (!sendMessageResult.getStatus().isSuccess()){
+                                // Failed to send message
+                            } else {
+                                Log.d("success", "success");
+                            }
+                        }
+                    }
+            );
+        } else {
+            // Unable to retrieve node with transcription capability
+        }
+    }
+
 
     protected void onStart() {
         googleApiClient.connect();
@@ -127,10 +205,14 @@ public class MainActivity extends WearableActivity implements
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+
+        setupJSONTranscription();
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
+        } else {
+            lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         }
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
     }
 
     @Override
@@ -140,6 +222,10 @@ public class MainActivity extends WearableActivity implements
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        boolean success = connectionResult.isSuccess();
+        Log.d("errorerror",connectionResult.getErrorMessage());
+        if (connectionResult.getErrorCode()== ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED){
+            Toast.makeText(getApplicationContext(), "Google Play Services have to be updated", Toast.LENGTH_SHORT).show();
+        }
     }
 }

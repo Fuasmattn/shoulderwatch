@@ -1,5 +1,6 @@
 package com.lmu.ath.shoulderwatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,7 +10,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ScrollingActivity extends AppCompatActivity {
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Wearable;
+
+import java.io.UnsupportedEncodingException;
+
+public class ScrollingActivity extends AppCompatActivity implements MessageApi.MessageListener {
+
+    public static final String JSON_TRANSCRIPTION_MESSAGE_PATH = "/json_transcription";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,26 +36,38 @@ public class ScrollingActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Wearable.API)
+                .build();
+
+        googleApiClient.connect();
+
+        Wearable.MessageApi.addListener(googleApiClient, this);
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
-        return true;
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onMessageReceived(MessageEvent messageEvent) {
+        if (messageEvent.getPath().equals(JSON_TRANSCRIPTION_MESSAGE_PATH)) {
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            byte[] jsonBytes = messageEvent.getData();
+            String json = null;
+            try {
+                json = new String(jsonBytes, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/html");
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Shoulderwatch JSON");
+            intent.putExtra(Intent.EXTRA_TEXT, json);
+
+            startActivity(Intent.createChooser(intent, "Send Email"));
+
         }
-        return super.onOptionsItemSelected(item);
     }
+
+
 }
