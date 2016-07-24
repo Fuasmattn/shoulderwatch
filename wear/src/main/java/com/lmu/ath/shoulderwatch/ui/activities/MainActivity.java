@@ -21,6 +21,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.location.FusedLocationProviderApi;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.wearable.CapabilityApi;
 import com.google.android.gms.wearable.CapabilityInfo;
@@ -37,7 +40,7 @@ import java.util.Locale;
 import java.util.Set;
 
 public class MainActivity extends WearableActivity implements
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
@@ -55,6 +58,9 @@ public class MainActivity extends WearableActivity implements
     private Button intentBtn;
 
     private String transcriptionNodeId = null;
+    private LocationRequest locationRequest;
+
+    private FusedLocationProviderApi fusedLocationProviderApi;
 
 
     @Override
@@ -75,7 +81,7 @@ public class MainActivity extends WearableActivity implements
         }
 
 
-        intentBtn = (Button)findViewById(R.id.sendDataBtn);
+        intentBtn = (Button) findViewById(R.id.sendDataBtn);
 
         intentBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -101,6 +107,13 @@ public class MainActivity extends WearableActivity implements
                 startActivity(intent);
             }
         });
+
+        fusedLocationProviderApi = LocationServices.FusedLocationApi;
+
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(5000);
 
     }
 
@@ -179,7 +192,7 @@ public class MainActivity extends WearableActivity implements
                     new ResultCallback<MessageApi.SendMessageResult>() {
                         @Override
                         public void onResult(MessageApi.SendMessageResult sendMessageResult) {
-                            if (!sendMessageResult.getStatus().isSuccess()){
+                            if (!sendMessageResult.getStatus().isSuccess()) {
                                 // Failed to send message
                             } else {
                                 Log.d("success", "success");
@@ -208,12 +221,47 @@ public class MainActivity extends WearableActivity implements
 
         setupJSONTranscription();
 
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        } else {
-            lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        1);
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        2);
+            }
+
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 1:
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(),"No permission given, can't proceed", Toast.LENGTH_SHORT).show();
+                } else {
+                    fusedLocationProviderApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+                }
+                break;
+            case 2:
+
+                break;
+        }
+    }
+
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -223,9 +271,19 @@ public class MainActivity extends WearableActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         boolean success = connectionResult.isSuccess();
-        Log.d("errorerror",connectionResult.getErrorMessage());
-        if (connectionResult.getErrorCode()== ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED){
+        Log.d("errorerror", connectionResult.getErrorMessage());
+        if (connectionResult.getErrorCode() == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED) {
             Toast.makeText(getApplicationContext(), "Google Play Services have to be updated", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+           
+        } else {
+            lastLocation = fusedLocationProviderApi.getLastLocation(googleApiClient);
+        }
+    }
+
 }
