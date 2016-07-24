@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class MainActivity extends WearableActivity implements
     private GoogleApiClient googleApiClient;
     private Location lastLocation = null;
 
+    private Button intentBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,16 @@ public class MainActivity extends WearableActivity implements
         setAmbientEnabled();
         initiateUI();
         dataManager = DataManager.getInstance();
+        intentBtn = (Button)findViewById(R.id.sendDataBtn);
+
+        intentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataManager.getAllDatabaseEntries(getApplicationContext());
+            }
+        });
+
+
 
         if (googleApiClient == null) {
             googleApiClient = new GoogleApiClient.Builder(this)

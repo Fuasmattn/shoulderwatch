@@ -24,4 +24,13 @@
         android:background="@mipmap/startbutton"
         android:layout_gravity="center"/>
 
+
+    <Button
+        android:id="@+id/sendDataBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Send Data"
+        android:background="@color/transparent"
+        android:layout_gravity="bottom"/>
+
 </android.support.wearable.view.BoxInsetLayout>
