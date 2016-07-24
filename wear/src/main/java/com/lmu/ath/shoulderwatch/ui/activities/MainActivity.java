@@ -280,7 +280,7 @@ public class MainActivity extends WearableActivity implements
     @Override
     public void onLocationChanged(Location location) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-           
+
         } else {
             lastLocation = fusedLocationProviderApi.getLastLocation(googleApiClient);
         }
