@@ -271,7 +271,7 @@ public class MainActivity extends WearableActivity implements
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         boolean success = connectionResult.isSuccess();
-        Log.d("errorerror", connectionResult.getErrorMessage());
+        //Log.d("errorerror", connectionResult.getErrorMessage());
         if (connectionResult.getErrorCode() == ConnectionResult.SERVICE_VERSION_UPDATE_REQUIRED) {
             Toast.makeText(getApplicationContext(), "Google Play Services have to be updated", Toast.LENGTH_SHORT).show();
         }

@@ -69,16 +69,24 @@ public class SelectableListFragment extends Fragment implements WearableListView
         ArrayList<Drawable> analogDeviceIcons = new ArrayList<Drawable>();
         analogDeviceIcons.add(getResources().getDrawable(R.mipmap.buch, null));
         analogDeviceIcons.add(getResources().getDrawable(R.mipmap.zeitung, null));
+        analogDeviceIcons.add(getResources().getDrawable(R.mipmap.notiz, null));
 
         ArrayList<Drawable> digitalDeviceIcons = new ArrayList<Drawable>();
         digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.phone, null));
         digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.tablet, null));
+        digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.laptop, null));
+        digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.watch, null));
+
 
         ArrayList<Drawable> contentIcons = new ArrayList<Drawable>();
         contentIcons.add(getResources().getDrawable(R.mipmap.text, null));
         contentIcons.add(getResources().getDrawable(R.mipmap.bild, null));
         contentIcons.add(getResources().getDrawable(R.mipmap.nachricht, null));
         contentIcons.add(getResources().getDrawable(R.mipmap.passwort, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.spiele, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.video, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.banking, null));
+        contentIcons.add(getResources().getDrawable(R.mipmap.maps, null));
 
         ArrayList<Drawable> surfRatingIcons = new ArrayList<Drawable>();
         surfRatingIcons.add(getResources().getDrawable(R.mipmap.easy, null));
