@@ -207,13 +207,15 @@ public class MainActivity extends WearableActivity implements
 
 
     protected void onStart() {
-        googleApiClient.connect();
         super.onStart();
+
+        googleApiClient.connect();
+
     }
 
     protected void onStop() {
-        googleApiClient.disconnect();
         super.onStop();
+        googleApiClient.disconnect();
     }
 
     @Override
@@ -240,7 +242,10 @@ public class MainActivity extends WearableActivity implements
                         2);
             }
 
+        } else {
+            fusedLocationProviderApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
+
     }
 
     @Override

@@ -31,6 +31,7 @@ public class SelectableListFragment extends Fragment implements WearableListView
     private DataManager dataManager;
     private WearableListView listView;
     private TextView titleText;
+    private String currentDeviceType;
 
 
     public static SelectableListFragment newInstance(String type) {
@@ -114,13 +115,19 @@ public class SelectableListFragment extends Fragment implements WearableListView
         } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.devicetype), typeIcons);
             titleText.setText("Gerätetyp");
-        } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), analogDeviceIcons);
-            titleText.setText("Geräte - analog");
-        } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
-            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_digital), digitalDeviceIcons);
-            titleText.setText("Geräte - digital");
-        } else if (listType.equals(SelectionsActivity.CONTENT)){
+        }
+
+        else if (listType.equals(SelectionsActivity.DEVICEANALOGDIGITAL)) {
+            currentDeviceType = dataManager.getSelectedDeviceType();
+            if (currentDeviceType.toLowerCase().equals("analog")){
+                wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_analog), analogDeviceIcons);
+                titleText.setText("Geräte - analog");
+            } else {
+                wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.device_digital), digitalDeviceIcons);
+                titleText.setText("Geräte - digital");
+            }
+        }
+        else if (listType.equals(SelectionsActivity.CONTENT)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), contentIcons);
             titleText.setText("Inhalt");
         } else if (listType.equals(SelectionsActivity.SURFRATING)){
@@ -188,14 +195,17 @@ public class SelectableListFragment extends Fragment implements WearableListView
 
         } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICETYPE, item);
+            dataManager.setSelectedDeviceType(item);
 
-        } else if (listType.equals(SelectionsActivity.DEVICEANALOG)){
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_ANALOG, item);
+        } else if (listType.equals(SelectionsActivity.DEVICEANALOGDIGITAL)){
+            if (currentDeviceType.toLowerCase().equals("analog")){
+                dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_ANALOG, item);
+            } else {
+                dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_DIGITAL, item);
+            }
+        }
 
-        } else if (listType.equals(SelectionsActivity.DEVICEDIGITAL)){
-            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_DIGITAL, item);
-
-        } else if (listType.equals(SelectionsActivity.CONTENT)){
+        else if (listType.equals(SelectionsActivity.CONTENT)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CONTENT, item);
 
         } else if (listType.equals(SelectionsActivity.SURFRATING)){

@@ -17,8 +17,7 @@ public class SelectionsActivity extends FragmentActivity {
 
     public static final String ENVIRONMENT = "ENVIRONMENT";
     public static final String DEVICETYPE = "DEVICETYPE";
-    public static final String DEVICEANALOG = "DEVICEANALOG";
-    public static final String DEVICEDIGITAL = "DEVICEDIGITAL";
+    public static final String DEVICEANALOGDIGITAL = "DEVICEANALOG";
     public static final String CONTENT = "CONTENT";
     public static final String SURFRATING = "SURFRATING";
     public static final String RELATIVE_POSITION = "RELATIVE_POSITION";
@@ -36,8 +35,8 @@ public class SelectionsActivity extends FragmentActivity {
 
 
         //TODO: add fragments for all listtypes + add content
-        final Fragment[] items = {PositionFragment.newInstance(), SelectableListFragment.newInstance(ENVIRONMENT), SelectableListFragment.newInstance(DEVICETYPE), SelectableListFragment.newInstance(DEVICEANALOG)
-                , SelectableListFragment.newInstance(DEVICEDIGITAL), SelectableListFragment.newInstance(CONTENT), SelectableListFragment.newInstance(SURFRATING),
+        final Fragment[] items = {PositionFragment.newInstance(), SelectableListFragment.newInstance(ENVIRONMENT), SelectableListFragment.newInstance(DEVICETYPE), SelectableListFragment.newInstance(DEVICEANALOGDIGITAL)
+                , SelectableListFragment.newInstance(CONTENT), SelectableListFragment.newInstance(SURFRATING),
                 SelectableListFragment.newInstance(DEFENCE_LEVEL), SelectableListFragment.newInstance(CROWD_LEVEL),
                 FinishFragment.newInstance()};
 

@@ -22,6 +22,8 @@ public class DataManager {
 
     public static DataManager instance;
 
+    private String selectedDeviceType;
+
     public DataManager() {
     }
 
@@ -105,5 +107,13 @@ public class DataManager {
             shoulderWatchJSON = new Gson().toJson(shoulderWatches);
         }
         return shoulderWatchJSON;
+    }
+
+    public String getSelectedDeviceType() {
+        return selectedDeviceType;
+    }
+
+    public void setSelectedDeviceType(String selectedDeviceType) {
+        this.selectedDeviceType = selectedDeviceType;
     }
 }
