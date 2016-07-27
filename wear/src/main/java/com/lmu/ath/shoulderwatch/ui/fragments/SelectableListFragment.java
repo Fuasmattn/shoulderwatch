@@ -32,6 +32,8 @@ public class SelectableListFragment extends Fragment implements WearableListView
     private WearableListView listView;
     private TextView titleText;
     private String currentDeviceType;
+    private ArrayList<Drawable> analogDeviceIcons;
+    private ArrayList<Drawable> digitalDeviceIcons;
 
 
     public static SelectableListFragment newInstance(String type) {
@@ -67,12 +69,12 @@ public class SelectableListFragment extends Fragment implements WearableListView
         typeIcons.add(getResources().getDrawable(R.mipmap.analog, null));
         typeIcons.add(getResources().getDrawable(R.mipmap.digital, null));
 
-        ArrayList<Drawable> analogDeviceIcons = new ArrayList<Drawable>();
+        analogDeviceIcons = new ArrayList<Drawable>();
         analogDeviceIcons.add(getResources().getDrawable(R.mipmap.buch, null));
         analogDeviceIcons.add(getResources().getDrawable(R.mipmap.zeitung, null));
         analogDeviceIcons.add(getResources().getDrawable(R.mipmap.notiz, null));
 
-        ArrayList<Drawable> digitalDeviceIcons = new ArrayList<Drawable>();
+        digitalDeviceIcons = new ArrayList<Drawable>();
         digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.phone, null));
         digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.tablet, null));
         digitalDeviceIcons.add(getResources().getDrawable(R.mipmap.laptop, null));
@@ -155,6 +157,21 @@ public class SelectableListFragment extends Fragment implements WearableListView
     }
 
 
+    public void reloadDeviceFragment(){
+        currentDeviceType = dataManager.getSelectedDeviceType();
+        if (currentDeviceType.toLowerCase().equals("analog")){
+            wearableListAdapter = new WearableListAdapter(getActivity(), getResources().getStringArray(R.array.device_analog), analogDeviceIcons);
+            titleText.setText("Geräte - analog");
+        } else {
+            wearableListAdapter = new WearableListAdapter(getActivity(), getResources().getStringArray(R.array.device_digital), digitalDeviceIcons);
+            titleText.setText("Geräte - digital");
+        }
+        if (wearableListAdapter != null){
+            listView.setAdapter(wearableListAdapter);
+        }
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();
@@ -196,7 +213,6 @@ public class SelectableListFragment extends Fragment implements WearableListView
         } else if (listType.equals(SelectionsActivity.DEVICETYPE)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICETYPE, item);
             dataManager.setSelectedDeviceType(item);
-
         } else if (listType.equals(SelectionsActivity.DEVICEANALOGDIGITAL)){
             if (currentDeviceType.toLowerCase().equals("analog")){
                 dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_DEVICE_ANALOG, item);

@@ -13,7 +13,7 @@ import com.lmu.ath.shoulderwatch.ui.fragments.FinishFragment;
 import com.lmu.ath.shoulderwatch.ui.fragments.SelectableListFragment;
 import com.lmu.ath.shoulderwatch.ui.fragments.PositionFragment;
 
-public class SelectionsActivity extends FragmentActivity {
+public class SelectionsActivity extends FragmentActivity implements GridViewPager.OnPageChangeListener {
 
     public static final String ENVIRONMENT = "ENVIRONMENT";
     public static final String DEVICETYPE = "DEVICETYPE";
@@ -23,6 +23,8 @@ public class SelectionsActivity extends FragmentActivity {
     public static final String RELATIVE_POSITION = "RELATIVE_POSITION";
     public static final String CROWD_LEVEL = "CROWD_LEVEL";
     public static final String DEFENCE_LEVEL = "DEFENCE_LEVEL";
+
+    private  GridPagerAdapter gridPagerAdapter;
 
 
     @Override
@@ -45,10 +47,29 @@ public class SelectionsActivity extends FragmentActivity {
         mViewPager = (GridViewPager) findViewById(R.id.pager);
 
         // Assigns an adapter to provide the content for this pager
-        mViewPager.setAdapter(new GridPagerAdapter(getApplicationContext(), getFragmentManager(), items));
+        gridPagerAdapter = new GridPagerAdapter(getApplicationContext(), getFragmentManager(), items);
+        mViewPager.setAdapter(gridPagerAdapter);
         mPageIndicator.setPager(mViewPager);
+        mViewPager.setOnPageChangeListener(this);
     }
 
 
+    @Override
+    public void onPageScrolled(int i, int i1, float v, float v1, int i2, int i3) {
 
+    }
+
+    @Override
+    public void onPageSelected(int i, int i1) {
+        if (i1 == 3){
+            SelectableListFragment deviceFragment = (SelectableListFragment)gridPagerAdapter.getFragment(0, i1);
+            deviceFragment.reloadDeviceFragment();
+
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
 }

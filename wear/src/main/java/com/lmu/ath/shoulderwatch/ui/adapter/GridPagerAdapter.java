@@ -3,6 +3,7 @@ package com.lmu.ath.shoulderwatch.ui.adapter;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Point;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 
@@ -35,4 +36,6 @@ public class GridPagerAdapter extends FragmentGridPagerAdapter{
     public Fragment getFragment(int row, int column) {
         return this.fragments[column];
     }
+
+
 }
