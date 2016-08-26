@@ -19,7 +19,9 @@ public class ShoulderWatchTable {
     public static final String COLUMN_DEVICE_DIGITAL = "device_digital";
     public static final String COLUMN_DEVICETYPE = "devicetype";
     public static final String COLUMN_CONTENT = "content";
+    public static final String COLUMN_SURF_TIME = "surf_time";
     public static final String COLUMN_SURF_RATING = "surf_rating";
+    public static final String COLUMN_SURF_DISTANCE = "surf_distance";
     public static final String COLUMN_RELATIVE_POSITION = "relative_position";
     public static final String COLUMN_CROWD_DENSITY = "crowd_density";
     public static final String COLUMN_DEFENCE_LEVEL = "defence_level";
@@ -37,7 +39,9 @@ public class ShoulderWatchTable {
             + COLUMN_DEVICE_DIGITAL + " text null, "
             + COLUMN_DEVICETYPE + " text not null, "
             + COLUMN_CONTENT + " text not null, "
+            + COLUMN_SURF_TIME + " text not null, "
             + COLUMN_SURF_RATING + " text not null, "
+            + COLUMN_SURF_DISTANCE + " text not null, "
             + COLUMN_RELATIVE_POSITION + " text not null, "
             + COLUMN_CROWD_DENSITY + " text not null, "
             + COLUMN_DEFENCE_LEVEL + " text not null"

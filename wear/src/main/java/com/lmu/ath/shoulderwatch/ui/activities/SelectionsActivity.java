@@ -19,10 +19,13 @@ public class SelectionsActivity extends FragmentActivity implements GridViewPage
     public static final String DEVICETYPE = "DEVICETYPE";
     public static final String DEVICEANALOGDIGITAL = "DEVICEANALOG";
     public static final String CONTENT = "CONTENT";
+    public static final String SURFTIME = "SURFTIME";
     public static final String SURFRATING = "SURFRATING";
+    public static final String SURFDISTANCE = "SURFDISTANCE";
     public static final String RELATIVE_POSITION = "RELATIVE_POSITION";
     public static final String CROWD_LEVEL = "CROWD_LEVEL";
     public static final String DEFENCE_LEVEL = "DEFENCE_LEVEL";
+
 
     private  GridPagerAdapter gridPagerAdapter;
 
@@ -38,7 +41,7 @@ public class SelectionsActivity extends FragmentActivity implements GridViewPage
 
         //TODO: add fragments for all listtypes + add content
         final Fragment[] items = {PositionFragment.newInstance(), SelectableListFragment.newInstance(ENVIRONMENT), SelectableListFragment.newInstance(DEVICETYPE), SelectableListFragment.newInstance(DEVICEANALOGDIGITAL)
-                , SelectableListFragment.newInstance(CONTENT), SelectableListFragment.newInstance(SURFRATING),
+                , SelectableListFragment.newInstance(CONTENT),SelectableListFragment.newInstance(SURFTIME), SelectableListFragment.newInstance(SURFRATING), SelectableListFragment.newInstance(SURFDISTANCE),
                 SelectableListFragment.newInstance(DEFENCE_LEVEL), SelectableListFragment.newInstance(CROWD_LEVEL),
                 FinishFragment.newInstance()};
 

@@ -132,9 +132,15 @@ public class SelectableListFragment extends Fragment implements WearableListView
         else if (listType.equals(SelectionsActivity.CONTENT)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.content), contentIcons);
             titleText.setText("Inhalt");
+        }else if (listType.equals(SelectionsActivity.SURFTIME)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_time), null);
+            titleText.setText("Beobachtungsdauer");
         } else if (listType.equals(SelectionsActivity.SURFRATING)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_rating), surfRatingIcons);
             titleText.setText("Inhalte zu sehen");
+        } else if (listType.equals(SelectionsActivity.SURFDISTANCE)){
+            wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.surf_distance), null);
+            titleText.setText("Entfernung");
         }else if (listType.equals(SelectionsActivity.RELATIVE_POSITION)){
             wearableListAdapter = new WearableListAdapter(context, getResources().getStringArray(R.array.relative_position), environmentIcons);
             titleText.setText("Position");
@@ -224,10 +230,16 @@ public class SelectableListFragment extends Fragment implements WearableListView
         else if (listType.equals(SelectionsActivity.CONTENT)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CONTENT, item);
 
+        } else if (listType.equals(SelectionsActivity.SURFTIME)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_SURF_TIME, item);
+
         } else if (listType.equals(SelectionsActivity.SURFRATING)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_SURF_RATING, item);
 
-        } else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
+        } else if (listType.equals(SelectionsActivity.SURFDISTANCE)){
+            dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_SURF_DISTANCE, item);
+
+        }else if (listType.equals(SelectionsActivity.CROWD_LEVEL)){
             dataManager.addStringValueToDatabaseRecord(ShoulderWatchTable.COLUMN_CROWD_DENSITY, item);
 
         } else if (listType.equals(SelectionsActivity.DEFENCE_LEVEL)){

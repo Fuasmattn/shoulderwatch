@@ -44,10 +44,22 @@
         <item>Maps/Location</item>
     </array>
 
+    <array name="surf_time">
+        <item>kurz (1-3s)</item>
+        <item>mittel (3-10s)</item>
+        <item>lang (10-30s)</item>
+    </array>
+
     <array name="surf_rating">
-        <item>leicht</item>
-        <item>mittel</item>
-        <item>schwer</item>
+        <item>viel erkannt</item>
+        <item>einiges erkannt</item>
+        <item>kaum etwas erkannt</item>
+    </array>
+
+    <array name="surf_distance">
+        <item>sehr nah (0-30cm)</item>
+        <item>nah (30-50cm)</item>
+        <item>weit entfernt (50cm-150cm)</item>
     </array>
 
     <array name="relative_position">

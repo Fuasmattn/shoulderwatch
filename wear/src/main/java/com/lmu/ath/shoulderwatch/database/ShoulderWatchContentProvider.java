@@ -177,7 +177,7 @@ public class ShoulderWatchContentProvider extends ContentProvider{
         String[] available = { ShoulderWatchTable.COLUMN_ID,
                 ShoulderWatchTable.COLUMN_TIME, ShoulderWatchTable.COLUMN_LOCATION_X,
                 ShoulderWatchTable.COLUMN_LOCATION_Y , ShoulderWatchTable.COLUMN_ENVIRONMENT, ShoulderWatchTable.COLUMN_DEVICE_ANALOG, ShoulderWatchTable.COLUMN_DEVICE_DIGITAL,
-                ShoulderWatchTable.COLUMN_DEVICETYPE , ShoulderWatchTable.COLUMN_CONTENT, ShoulderWatchTable.COLUMN_SURF_RATING, ShoulderWatchTable.COLUMN_RELATIVE_POSITION,
+                ShoulderWatchTable.COLUMN_DEVICETYPE , ShoulderWatchTable.COLUMN_CONTENT,ShoulderWatchTable.COLUMN_SURF_TIME, ShoulderWatchTable.COLUMN_SURF_RATING, ShoulderWatchTable.COLUMN_SURF_DISTANCE,ShoulderWatchTable.COLUMN_RELATIVE_POSITION,
                 ShoulderWatchTable.COLUMN_CROWD_DENSITY, ShoulderWatchTable.COLUMN_DEFENCE_LEVEL};
         if (projection != null) {
             HashSet<String> requestedColumns = new HashSet<String>(Arrays.asList(projection));

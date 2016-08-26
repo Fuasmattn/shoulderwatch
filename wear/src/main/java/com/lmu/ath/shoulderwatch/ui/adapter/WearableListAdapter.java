@@ -64,8 +64,10 @@ public class WearableListAdapter extends WearableListView.Adapter {
         // replace text contents
         textView.setText(listData[position]);
         CircledImageView circledView = itemHolder.circledImageView;
-        if (position < images.size()){
-            circledView.setImageDrawable(images.get(position));
+        if (images != null) {
+            if (position < images.size()) {
+                circledView.setImageDrawable(images.get(position));
+            }
         }
         // replace list item's metadata
         holder.itemView.setTag(position);

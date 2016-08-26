@@ -14,7 +14,6 @@
         android:layout_marginEnd="16dp"
         android:layout_width="52dip"
         android:layout_height="52dip"
-        android:src="@mipmap/metro"
         app:circle_border_color="@color/white"
         app:circle_border_width="2dp"/>
     <TextView
