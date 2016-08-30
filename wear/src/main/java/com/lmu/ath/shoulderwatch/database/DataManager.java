@@ -94,7 +94,9 @@ public class DataManager {
                 shoulderWatch.setDeviceAnalog(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_DEVICE_ANALOG)));
                 shoulderWatch.setDeviceDigital(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_DEVICE_DIGITAL)));
                 shoulderWatch.setContent(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_CONTENT)));
+                shoulderWatch.setSurfTime(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_SURF_TIME)));
                 shoulderWatch.setSurfRating(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_SURF_RATING)));
+                shoulderWatch.setSurfDistance(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_SURF_DISTANCE)));
                 shoulderWatch.setRelativePosition(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_RELATIVE_POSITION)));
                 shoulderWatch.setCrowdDensity(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_CROWD_DENSITY)));
                 shoulderWatch.setDefenceLevel(cursor.getString(cursor.getColumnIndex(ShoulderWatchTable.COLUMN_DEFENCE_LEVEL)));

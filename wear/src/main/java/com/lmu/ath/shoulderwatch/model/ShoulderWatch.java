@@ -13,7 +13,9 @@ public class ShoulderWatch {
     private String deviceAnalog;
     private String deviceDigital;
     private String content;
+    private String surfTime;
     private String surfRating;
+    private String surfDistance;
     private String relativePosition;
     private String crowdDensity;
     private String defenceLevel;
@@ -51,8 +53,16 @@ public class ShoulderWatch {
         this.content = content;
     }
 
+    public void setSurfTime(String surfTime) {
+        this.surfTime = surfTime;
+    }
+
     public void setSurfRating(String surfRating) {
         this.surfRating = surfRating;
+    }
+
+    public void setSurfDistance(String surfDistance) {
+        this.surfDistance = surfDistance;
     }
 
     public void setRelativePosition(String relativePosition) {
